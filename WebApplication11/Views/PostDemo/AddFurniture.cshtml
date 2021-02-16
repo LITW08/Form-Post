@@ -1,0 +1,28 @@
+﻿@using WebApplication11.Models
+@model AddFurnitureViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 jumbotron">
+                <h1>Total count - @Model.Count</h1>
+                <h2>Add Furniture</h2>
+                <form action="/postdemo/addfurniture" method="POST">
+                    <input type="text" name="name" placeholder="Name" class="form-control mt-2"/>
+                    <input type="text" name="color" placeholder="Color" class="form-control mt-2"/>
+                    <input type="text" name="price" placeholder="Price" class="form-control mt-2"/>
+                    <input type="text" name="quantityinstock" placeholder="Quantity" class="form-control mt-2"/>
+                    <button class="btn btn-primary btn-block mt-2">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

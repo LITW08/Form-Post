@@ -1,0 +1,55 @@
+﻿@using WebApplication11.Models
+@model SearchResultsViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" value="@Model.Min" name="min" placeholder="Min Stock" class="form-control"/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" value="@Model.Max" name="max" placeholder="Max Stock" class="form-control"/>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-block btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12 mt-5">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Units In Stock</th>
+                    <th>Quantity Per Unit</th>
+                    <th>Unit Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (Product product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.UnitsInStock</td>
+                        <td>@product.QuantityPerUnit</td>
+                        <td>@product.UnitPrice.ToString("C")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
