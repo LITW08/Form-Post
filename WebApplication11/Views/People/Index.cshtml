@@ -23,6 +23,7 @@
                         <th>Last Name</th>
                         <th>Age</th>
                         <th>Delete</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,9 @@
                                     <input type="hidden" name="id" value="@person.Id"/>
                                     <button class="btn btn-danger btn-block">Delete</button>
                                 </form>
+                            </td>
+                            <td>
+                                <a href="/people/edit?id=@person.Id" class="btn btn-warning btn-block">Edit</a>
                             </td>
                         </tr>
                     }

@@ -11,6 +11,11 @@ namespace WebApplication11.Models
         public List<Person> People { get; set; }
     }
 
+    public class EditPersonViewModel
+    {
+        public Person Person { get; set; }
+    }
+
     public class Person
     {
         public int Id { get; set; }
@@ -30,7 +35,7 @@ namespace WebApplication11.Models
 
         public List<Person> GetAll()
         {
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             using (SqlCommand cmd = connection.CreateCommand())
             {
                 cmd.CommandText = "SELECT * FROM People";
@@ -74,6 +79,48 @@ namespace WebApplication11.Models
             {
                 cmd.CommandText = "DELETE FROM People WHERE Id = @id";
                 cmd.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public Person GetById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM People WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (!reader.Read())
+                {
+                    return null;
+                }
+
+                Person person = new Person
+                {
+                    Id = (int)reader["Id"],
+                    FirstName = (string) reader["FirstName"],
+                    LastName = (string) reader["LastName"],
+                    Age = (int) reader["Age"]
+                };
+
+                return person;
+            }
+        }
+
+        public void Update(Person person)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlCommand cmd = connection.CreateCommand())
+            {
+                cmd.CommandText = "UPDATE People SET FirstName = @firstName, LastName = @lastName, " +
+                                  "Age = @age WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@firstName", person.FirstName);
+                cmd.Parameters.AddWithValue("@lastName", person.LastName);
+                cmd.Parameters.AddWithValue("@age", person.Age);
+                cmd.Parameters.AddWithValue("@id", person.Id);
                 connection.Open();
                 cmd.ExecuteNonQuery();
             }

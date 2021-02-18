@@ -115,6 +115,7 @@
     <Content Include="Views\People\Add.cshtml" />
     <Content Include="Views\PostDemo\SimpleForm.cshtml" />
     <Content Include="Views\PostDemo\HiddenTest.cshtml" />
+    <Content Include="Views\People\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

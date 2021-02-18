@@ -42,5 +42,30 @@ namespace WebApplication11.Controllers
             db.Delete(id);
             return Redirect("/people/index");
         }
+
+        public ActionResult Edit(int id)
+        {
+            PeopleDb db = new PeopleDb(_connectionString);
+            Person person = db.GetById(id);
+            if (person == null)
+            {
+                return Redirect("/people/index");
+            }
+            
+            EditPersonViewModel vm = new EditPersonViewModel
+            {
+                Person = person
+            };
+            
+            return View(vm);
+        }
+
+        public ActionResult Update(Person person)
+        {
+            PeopleDb db = new PeopleDb(_connectionString);
+            db.Update(person);
+
+            return Redirect("/people/index");
+        }
     }
 }
